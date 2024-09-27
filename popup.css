@@ -1,21 +1,37 @@
 body {
   font-family: Arial, sans-serif;
-  width: 15rem;
+ min-width: 15rem;
   background-color: #333;
   color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 12rem;
+  height: auto;
   margin: 0;
+  max-height: 20rem;
+  
+}
+#container{
+  overflow-y: auto; 
+  overflow-x: hidden;
 }
 
-h2 {
-  margin: 2rem;
-}
 
-select, button {
+#container {
+  scrollbar-color: #343434 #36454F	;
+  scrollbar-width: thin; 
+}
+#customTheme {
+  display: none;
+}
+h1 {
+  margin: 1rem;
+}
+#themeSelector{
+  margin-left: 1rem;
+}
+select, button, label {
   margin-bottom: 10px;
   padding: 10px;
   font-size: 14px;
@@ -25,7 +41,7 @@ select, button {
   outline: none;
 }
 
-select {
+select, input[type="color"] {
   background-color: #444;
   color: white;
 }
@@ -35,6 +51,8 @@ button {
   color: white;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-top: 2rem;
+  margin-left:1rem ;
 }
 
 button:hover {
@@ -43,4 +61,12 @@ button:hover {
 
 button:active {
   background-color: #004085;
+}
+
+label {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  margin-right: 5rem;
 }
