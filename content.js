@@ -1,4 +1,4 @@
-function applyJsonTheme(json, theme) {
+function applyJsonTheme(json, theme, customColors) {
     let jsonStr = JSON.stringify(json, null, 2);
     let themedJson = jsonStr
         .replace(/("([^"]+)"):/g, '<span class="json-key">$1</span>:')
@@ -25,7 +25,8 @@ function applyJsonTheme(json, theme) {
             brace: '#a0522d',
             bracket: '#8a2be2',
             default: '#000000'
-        }
+        },
+        custom: customColors || {}
     };
 
     const selectedTheme = themeClasses[theme] || { background: 'transparent', default: 'inherit' };
@@ -43,13 +44,13 @@ function applyJsonTheme(json, theme) {
     return themedJson;
 }
 
-function applySelectedTheme(theme) {
+function applySelectedTheme(theme, customColors) {
     chrome.storage.sync.set({ selectedTheme: theme }, () => {
         const jsonElement = document.querySelector('pre');
         if (jsonElement) {
             try {
                 const json = JSON.parse(jsonElement.textContent);
-                const themedJson = applyJsonTheme(json, theme);
+                const themedJson = applyJsonTheme(json, theme, customColors);
                 jsonElement.innerHTML = themedJson;
             } catch (e) {
                 console.error('invalid JSON:', e);
@@ -58,15 +59,15 @@ function applySelectedTheme(theme) {
     });
 }
 
-
 window.onload = function() {
-    chrome.storage.sync.get('selectedTheme', (data) => {
+    chrome.storage.sync.get(['selectedTheme', 'customThemeColors'], (data) => {
         const theme = data.selectedTheme || 'light';
+        const customColors = data.customThemeColors || {};
         const jsonElement = document.querySelector('pre');
         if (jsonElement) {
             try {
                 const json = JSON.parse(jsonElement.textContent);
-                const themedJson = applyJsonTheme(json, theme);
+                const themedJson = applyJsonTheme(json, theme, customColors);
                 jsonElement.innerHTML = themedJson;
             } catch (e) {
                 console.error('invalid JSON:', e);
