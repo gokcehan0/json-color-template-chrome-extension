@@ -1,18 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>JSON Viewer</title>
+    <title>JSON Viewer Theme</title>
     <link rel="stylesheet" href="popup.css">
 </head>
 <body>
-    <h1>JSON Viewer</h1>
-    <select id="themeSelector">
-        <option value="default">Default</option>
-        <option value="dark">Dark</option>
-        <option value="light">Light</option>
-    </select>
-    <button id="applyTheme">Apply Theme</button>
+    <div id="container">
+        <h1>JSON Viewer</h1>
+
+        <label for="themeSelector"></label>
+        <select id="themeSelector">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+            <option value="custom">Custom</option>
+        </select>
+
+        <div id="customTheme">
+            <label for="bgColor">Background Color:</label>
+            <input type="color" id="bgColor">
+            <label for="keyColor">Key Color:</label>
+            <input type="color" id="keyColor">
+            <label for="numberColor">Number Color:</label>
+            <input type="color" id="numberColor">
+            <label for="stringColor">String Color:</label>
+            <input type="color" id="stringColor">
+            <label for="braceColor">Brace Color:</label>
+            <input type="color" id="braceColor">
+            <label for="bracketColor">Bracket Color:</label>
+            <input type="color" id="bracketColor">
+            <label for="defaultColor">Default Text Color:</label>
+            <input type="color" id="defaultColor">
+        </div>
+
+        <button id="applyTheme">Apply Theme</button>
+    </div>
     <script src="popup.js"></script>
 </body>
 </html>
